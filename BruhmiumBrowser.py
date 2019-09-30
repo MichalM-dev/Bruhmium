@@ -53,23 +53,29 @@ class Okno_uzivatel:
 
         # URL, back button, etc.
 
-        self.ulrMenuFrame = tk.Frame()
-        self.backButton = tk.Button(self.ulrMenuFrame, text = "<-")
+        self.urlMenuFrame = tk.Frame()
+        self.backButton = tk.Button(self.urlMenuFrame, text = "<-")
         self.backButton.grid(column = 0, row = 0, ipadx = 20, padx = 20)
+
+        self.goButton = tk.Button(self.urlMenuFrame)
 
         self.urlField = tk.Entry(width = 80)
         self.urlField.grid(column = 1, row = 0, sticky = "w")
 
+        OPTIONS = ["Placeholder1", "Placeholder2", "Placeholder3"]  # opened tabs
+        self.openedTab = tk.StringVar(self.urlMenuFrame)  # active tab
+        self.openedTab.set(OPTIONS[0])  # default tab
+        self.tabMenu = tk.OptionMenu(self.urlMenuFrame, self.openedTab, *OPTIONS)
+        self.tabMenu.grid(column=2, row=0)
+        self.openedTab.trace("w", self.changed)
 
-        OPTIONS = ["Placeholder1", "Placeholder2", "Placeholder3"]
-        self.openedTab = tk.StringVar(self.ulrMenuFrame)
-        self.openedTab.set(OPTIONS[0])
-        self.tabMenu = tk.OptionMenu(self.ulrMenuFrame, self.openedTab , *OPTIONS)
-        self.tabMenu.grid(column = 2, row = 0)
+        self.urlMenuFrame.grid(column=0, row=0)
 
-        self.ulrMenuFrame.grid(column = 0, row = 0)
+    def changed(self, *args):  # funkce co se zavolá pokaždé co se změní tab
+        print("SUCCESS")
 
-
+    def add_tab(self):
+        pass
 
     def zviditelneniOkna(self):
         self.okno.config(menu = self.menubar)
